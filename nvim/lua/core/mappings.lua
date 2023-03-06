@@ -11,12 +11,22 @@ M.general = {
     -- go to  beginning and end
     ["<C-b>"] = { "<ESC>^i", "beginning of line" },
     ["<C-e>"] = { "<End>", "end of line" },
+    -- ["<Home>"] = { "<ESC>^i", "beginning of line" },
+    -- ["<C-Right>"] = { "<End>", "end of line" },
 
     -- navigate within insert mode
     ["<C-h>"] = { "<Left>", "move left" },
     ["<C-l>"] = { "<Right>", "move right" },
     ["<C-j>"] = { "<Down>", "move down" },
     ["<C-k>"] = { "<Up>", "move up" },
+
+    -- move to end of line
+    ["<End>"] = { "<ESC>^i", "move to end of line" },
+
+    -- custom copy and paste
+    ["<C-S-c>"] = { "<cmd> hs.eventtap.keyStroke({'ctrl', 'shift'}, 'c')<CR>", "copy to clipboard" },
+    ["<C-S-v>"] = { "<cmd> hs.eventtap.keyStroke({'ctrl', 'shift'}, 'v')<CR>", "paste from clipboard" },
+  
   },
 
   n = {
