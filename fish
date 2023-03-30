@@ -1,1 +1,0 @@
-/home/collins/.config/fish
