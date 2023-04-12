@@ -8,6 +8,21 @@ case $- in
       *) return;;
 esac
 
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -35,11 +50,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -63,15 +73,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -91,6 +92,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ls='/opt/coreutils/bin/ls'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -115,6 +117,25 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#!/bin/bash
+
+#session_name="sesh"
+
+# 1. First you check if a tmux session exists with a given name.
+#tmux has-session -t=$session_name 2> /dev/null
+
+# 2. Create the session if it doesn't exists.
+#if [[ $? -ne 0 ]]; then
+#  TMUX='' tmux new-session -d -s "$session_name"
+#fi
+
+# 3. Attach if outside of tmux, switch if you're in tmux.
+#if [[ -z "$TMUX" ]]; then
+#  tmux attach -t "$session_name"
+#else
+#  tmux switch-client -t "$session_name"
+#fi
 
 #!/bin/bash
 
@@ -186,8 +207,8 @@ cal > /tmp/terminal1
 # -h not supported in Ubuntu 18.04. Use second answer: https://askubuntu.com/a/1028566/307523
 tr -cd '\11\12\15\40\60-\136\140-\176' < /tmp/terminal1  > /tmp/terminal
 
-CalLineCnt=1
-Today=$(date +"%e")
+# CalLineCnt=1
+# Today=$(date +"%e")
 
 printf "\033[32m"   # color green -- see list above.
 
@@ -250,7 +271,9 @@ while IFS= read -r Time; do
 done < /tmp/terminal
 
 tput rc                     # Restore saved cursor position.
-screenfetch
+# eval "$(starship init bash)"
+pfetch
+# screenfetch
 figlet Hey Collins |lolcat
 fish
 
@@ -277,7 +300,7 @@ unset __conda_setup
 
 
 #initialize Z (https://github.com/rupa/z) 
-. ~/z.sh 
+# . ~/z.sh 
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
