@@ -1,0 +1,97 @@
+window:
+  dynamic_title: true
+  dimensions:
+    columns: 0
+    lines: 0
+
+  opacity: 1.0
+
+  position:
+    x: 0
+    y: 0
+
+  #startup_mode: SimpleFullscreen
+  #position:
+    #x: 0
+    #y: 0
+
+  padding:
+    x: 25
+    y: 15 
+
+  dynamic_padding: false
+  decorations: none
+
+scrolling:
+  history: 50000
+  multiplier: 3
+
+font:
+  normal:
+    family: SauceCodePro NF
+    style: Regular
+
+  bold:
+    family: SauceCodePro NF
+    style: Bold
+
+  italic:
+    family: SauceCodePro NF
+    style: Bold Italic
+
+  size: 17.0
+
+  offset:
+    x: 0
+    y: 5
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+  use_thin_strokes: true
+
+draw_bold_text_with_bright_colors: true
+
+key_bindings:
+    - { key: J,        mods: Alt,           chars: "\x1bj"                       }
+    - { key: K,        mods: Alt,           chars: "\x1bk"                       }
+    - { key: H,        mods: Alt,           chars: "\x1bh"                       }
+    - { key: L,        mods: Alt,           chars: "\x1bl"                       }
+    - { key: T,        mods: Alt,           chars: "\x1bt"                       }
+    - { key: W,        mods: Alt|Shift,     chars: "\x1bW"                       }
+    - { key: P,        mods: Alt,           chars: "\x1bp"                       }
+    - { key: N,        mods: Alt,           chars: "\x1bn"                       }
+    - { key: D,        mods: Alt,           chars: "\x1bd"                       }
+    - { key: E,        mods: Alt,           chars: "\x1be"                       }
+    - { key: X,        mods: Alt|Shift,     chars: "\x1bX"                       }
+
+scheme: &carbonfox
+    primary:
+      background: '0x161616'
+      foreground: '0xf2f4f8'
+     # Normal colors
+    normal:
+      black:   '0x282828'
+      red:     '0xee5396'
+      green:   '0x25be6a'
+      yellow:  '0x08bdba'
+      blue:    '0x78a9ff'
+      magenta: '0xbe95ff'
+      cyan:    '0x33b1ff'
+      white:   '0xdfdfe0'
+     # Bright colors
+    bright:
+      black:   '0x484848'
+      red:     '0xf16da6'
+      green:   '0x46c880'
+      yellow:  '0x2dc7c4'
+      blue:    '0x8cb6ff'
+      magenta: '0xc8a5ff'
+      cyan:    '0x52bdff'
+      white:   '0xe4e4e5'
+    indexed_colors:
+      - { index: 16, color: '0x3ddbd9' }
+      - { index: 17, color: '0xff7eb6' }
+
+colors: *carbonfox
