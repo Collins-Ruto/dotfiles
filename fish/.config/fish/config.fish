@@ -12,7 +12,7 @@ starship init fish | source
 
 # source ~/.local/share/icons-in-terminal/icons.fish
 
-set -gx STARSHIP_CONFIG ~/devs/dotfiles/shared/starship/catpuccin/starship.toml 
+set -gx STARSHIP_CONFIG ~/.config/starship/catpuccin.toml 
 
 set -x PATH $PATH $HOME/.npm-packages/bin
 # Add NVM to PATH for Fish shell
