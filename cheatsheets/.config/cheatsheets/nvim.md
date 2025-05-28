@@ -339,6 +339,84 @@
 
 ---
 
+# Vim Visual Multi - Key Bindings
+
+## Creating Cursors/Selections
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+n` | Select word under cursor (normal mode) or selection (visual mode) |
+| `Ctrl+Down` | Add cursor vertically down |
+| `Ctrl+Up` | Add cursor vertically up |
+| `Shift+Arrows` | Start selecting characters |
+
+---
+
+## Navigation & Management
+
+| Key | Action |
+|-----|--------|
+| `n` | Find next occurrence |
+| `N` | Find previous occurrence |
+| `]` | Go to next cursor/region |
+| `[` | Go to previous cursor/region |
+| `q` | Skip current and go to next |
+| `Q` | Remove current region |
+| `Tab` | Switch between cursor and extend mode |
+
+---
+
+## Fast Navigation
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+f` | Fast forward (go to first region in next page) |
+| `Ctrl+b` | Fast backward (go to first region in previous page) |
+
+---
+
+## Search Options (after selection)
+
+| Key | Action |
+|-----|--------|
+| `\\w` | Toggle whole word search |
+| `\\c` | Cycle case setting (sensitive → ignorecase → smartcase) |
+
+---
+
+## Find Operator (VM must be active)
+
+| Key | Action |
+|-----|--------|
+| `m{motion}` | Find all occurrences in motion range |
+| `mj` | Find occurrences in line below |
+| `m8j` | Find occurrences in 8 lines below |
+| `mip` | Find occurrences inside paragraph |
+| `mas` | Find occurrences around sentence |
+
+---
+
+## Mouse Support (if enabled)
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+LeftMouse` | Create cursor at clicked position |
+| `Ctrl+RightMouse` | Select clicked word |
+| `Meta+Ctrl+RightMouse` | Create column of cursors to clicked line |
+
+---
+
+## Notes
+
+- `\\` is the default leader key (configurable with `g:VM_leader`)
+- Arrow keys and Ctrl+arrows move around without affecting cursors
+- `hjkl` moves all cursors together
+- Can replace `Ctrl+n` with `Ctrl+d` via configuration
+- Cursors skip shorter lines when adding vertically
+- Can add cursors on empty lines when starting at column 1
+
+---
+
 ## 💡 Pro Tips
 
 - **Leader Key**: `<Space>` is your main leader key for most operations

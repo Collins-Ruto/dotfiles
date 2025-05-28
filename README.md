@@ -3,9 +3,9 @@
 
 *"Simplicity is the ultimate sophistication"* - Leonardo da Vinci
 
-**[![GitHub Repo stars](https://img.shields.io/github/stars/collins-ruto/dotfiles?style=social)](https://github.com/yourusername/yourrepo)**
+**[![GitHub Repo stars](https://img.shields.io/github/stars/collins-ruto/dotfiles?style=social)](https://github.com/Collins-Ruto/dotfiles)**
 
-**[⭐ Star this repo](https://github.com/Collins-Ruto/dotfiles) • [⚠️ Report issues](https://github.com/Collins-Ruto/dotfiles/issues/new) • [𖣤 Suggest features]([link](https://github.com/Collins-Ruto/dotfiles/issues/new))**
+**[⭐ Star this repo](https://github.com/Collins-Ruto/dotfiles) • [⚠️ Report issues](https://github.com/Collins-Ruto/dotfiles/issues/new) • [𖣤 Suggest features](https://github.com/Collins-Ruto/dotfiles/issues/new)**
 
 </div>
 
