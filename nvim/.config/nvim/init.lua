@@ -45,3 +45,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
+
+vim.notify = require "notify"
+
+vim.o.wildignorecase = true

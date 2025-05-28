@@ -17,25 +17,24 @@ map("i", "jk", "<ESC>")
 vim.keymap.set("n", "<A-j>", function()
   local count = vim.v.count > 0 and vim.v.count or 1
   vim.cmd(string.format("move .+%d", count))
-  vim.cmd("normal! ==")
+  vim.cmd "normal! =="
 end, { noremap = true, silent = true, desc = "Move line down with count" })
 
 vim.keymap.set("n", "<A-k>", function()
   local count = vim.v.count > 0 and vim.v.count or 1
   vim.cmd(string.format("move .-%d", count + 1)) -- +1 to avoid invalid range
-  vim.cmd("normal! ==")
+  vim.cmd "normal! =="
 end, { noremap = true, silent = true, desc = "Move line up with count" })
-
 
 -- Visual mode: Move selection up/down
 map("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
 
 -- Normal & Visual mode select all
-vim.keymap.set({'n', 'i'}, '<C-a>', '<Esc>ggVG', { noremap = true, silent = true })
+vim.keymap.set({ "n", "i" }, "<C-a>", "<Esc>ggVG", { noremap = true, silent = true })
 
 -- Normal mode: Toggle comment on current line
-map("n", "<C-/>", function ()
+map("n", "<C-/>", function()
   require("Comment.api").toggle.linewise.current()
 end, vim.tbl_extend("force", opts, { desc = "Toggle comment (line)" }))
 
@@ -47,7 +46,7 @@ map("v", "<C-/>", function()
 end, vim.tbl_extend("force", opts, { desc = "Toggle comment (visual)" }))
 
 -- equalize all windows
-vim.keymap.set('n', "<leader>=", "<C-W><C-=>", { noremap = true })
+vim.keymap.set("n", "<leader>=", "<C-W><C-=>", { noremap = true })
 
 vim.keymap.set("n", "zR", "zR", { desc = "Open all folds" })
 vim.keymap.set("n", "zM", "zM", { desc = "Close all folds" })
@@ -55,3 +54,23 @@ vim.keymap.set("n", "za", "za", { desc = "Toggle fold at cursor" })
 vim.keymap.set("n", "zk", "zk", { desc = "Previous fold" })
 vim.keymap.set("n", "zj", "zj", { desc = "Next fold" })
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VisualMultiLoaded",
+  callback = function()
+    vim.api.nvim_set_keymap("n", "<C-F2>", "<Plug>(VM-Select-All)", {})
+    vim.api.nvim_set_keymap("x", "<C-F2>", "<Plug>(VM-Visual-All)", {})
+  end,
+})
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+vim.keymap.set("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Zoxide jump (Oil)" })
+-- vim.keymap.set("x", "<C-F2>", "<Plug>(VM-Visual-All)", {
+--   desc = "Select all occurrences of selection",
+--   remap = true,
+-- })
+--
+-- vim.keymap.set("n", "<C-F2>", "<Plug>(VM-Select-All)", {
+--   desc = "Select all occurrences",
+--   remap = true,
+-- })
