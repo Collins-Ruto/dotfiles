@@ -128,6 +128,18 @@ If you want a persistent custom configuration, **replace the template** used by 
 
 Otherwise, any changes will be lost on next theme or color update.
 
+#### 🖥️ Changing the top bar border rounding / radius
+
+Edit line 337 & 342 in, 
+```
+~/.config/ags/scss/_bar.scss
+```
+
+which is in the `.corner` (The top bar - bottom rounded edge) 
+and `.corner-black` (The black rounded edge on the top and bottom corners) classes and contains @include large-rounding;
+
+replace the two with something like `border-radius: 15px;`
+
 ### 🗑️ **Clean Removal**
 
 ---
