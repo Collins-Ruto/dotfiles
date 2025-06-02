@@ -24,6 +24,7 @@ return {
       ensure_installed = {
         "biome",
         "typescript-language-server",
+        "lua-language-server",
         "tailwindcss-language-server",
       },
     },
@@ -170,6 +171,7 @@ return {
   {
     "mg979/vim-visual-multi",
     branch = "master",
+    lazy = false,
     init = function()
       -- Disable default mappings
       -- vim.g.VM_default_mappings = 0
@@ -232,42 +234,6 @@ return {
     },
     config = function()
       require "configs.telescope" -- ⬅️ move config logic here
-    end,
-  },
-  {
-    "jvgrootveld/telescope-zoxide",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "stevearc/oil.nvim",
-    },
-    config = function()
-      local telescope = require "telescope"
-      telescope.load_extension "zoxide"
-
-      telescope.setup {
-        extensions = {
-          zoxide = {
-            prompt_title = "[ Zoxide Directories ]",
-            mappings = {
-              default = {
-                action = function(selection)
-                  require("oil").open(selection.path)
-                end,
-              },
-            },
-            entry_maker = function(entry)
-              local home = vim.loop.os_homedir()
-              local display = entry.path:gsub("^" .. home, "~")
-              return {
-                value = entry.path,
-                ordinal = entry.path,
-                display = display,
-                path = entry.path,
-              }
-            end,
-          },
-        },
-      }
     end,
   },
 
@@ -338,6 +304,28 @@ return {
     },
     config = function()
       require "configs.cmp"() -- add cmdline setup
+    end,
+  },
+
+  {
+    "MagicDuck/grug-far.nvim",
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
+    config = function()
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require("grug-far").setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+      }
+      vim.keymap.set("n", "<leader>gs", function()
+        require("grug-far").open {
+          engine = "astgrep",
+          prefills = {
+            paths = vim.fn.getcwd(), -- current working directory
+          },
+        }
+      end, { desc = "grug-far: ast-grep in cwd" })
     end,
   },
 

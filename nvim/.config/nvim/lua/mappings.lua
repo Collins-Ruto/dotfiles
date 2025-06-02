@@ -57,8 +57,8 @@ vim.keymap.set("n", "zj", "zj", { desc = "Next fold" })
 vim.api.nvim_create_autocmd("User", {
   pattern = "VisualMultiLoaded",
   callback = function()
-    vim.api.nvim_set_keymap("n", "<C-F2>", "<Plug>(VM-Select-All)", {})
-    vim.api.nvim_set_keymap("x", "<C-F2>", "<Plug>(VM-Visual-All)", {})
+    vim.api.nvim_set_keymap("n", "<F26>", "<Plug>(VM-Select-All)", {})
+    vim.api.nvim_set_keymap("x", "<F26>", "<Plug>(VM-Visual-All)", {})
   end,
 })
 
@@ -93,6 +93,55 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 vim.keymap.set("v", "/", 'y/\\c<C-R>"', { desc = "Search selected text (ignore case)" })
+
+-- Create key mapping: <leader>mv to start Visual Multi
+vim.keymap.set("n", "<leader>mv", ":VMSearch<CR>", { desc = "Start Visual Multi", silent = true })
+
+-- Unmap <C-n> in normal mode (if previously set by something else)
+vim.keymap.del("n", "<C-n>")
+
+-- Configure Visual Multi mappings
+vim.o.mouse = "a"
+vim.g.VM_maps = vim.g.VM_maps or {}
+-- Set Visual Multi leader key
+vim.g.VM_leader = "\\"
+
+-- Keyboard mappings
+vim.g.VM_maps["Find Under"] = "<C-n>"
+vim.g.VM_maps["Find Subword Under"] = "<C-n>"
+
+-- Mouse mappings
+vim.g.VM_maps["Mouse Cursor"] = "<C-LeftMouse>" -- Toggle VM cursor at click
+vim.g.VM_maps["Mouse Word"] = "<C-RightMouse>" -- Select word under mouse
+vim.g.VM_maps["Mouse Column"] = "<M-C-RightMouse>" -- Block selection (column mode)
+
+-- Start visual mode and move right/left
+vim.keymap.set("n", "<S-Right>", "v<Right>", { noremap = true })
+vim.keymap.set("n", "<S-Left>", "v<Left>", { noremap = true })
+vim.keymap.set("n", "<S-Up>", "v<Up>", { noremap = true })
+vim.keymap.set("n", "<S-Down>", "v<Down>", { noremap = true })
+-- in visual mode
+vim.keymap.set("v", "<S-Right>", "<Right>", { noremap = true })
+vim.keymap.set("v", "<S-Left>", "<Left>", { noremap = true })
+vim.keymap.set("v", "<S-Up>", "<Up>", { noremap = true })
+vim.keymap.set("v", "<S-Down>", "<Down>", { noremap = true })
+-- in insert mode
+vim.keymap.set("i", "<S-Right>", "<Esc>v<Right>", { noremap = true })
+vim.keymap.set("i", "<S-Left>", "<Esc>v<Left>", { noremap = true })
+vim.keymap.set("i", "<S-Up>", "<Esc>v<Up>", { noremap = true })
+vim.keymap.set("i", "<S-Down>", "<Esc>v<Down>", { noremap = true })
+
+-- In visual mode, select to beginning/end of line
+vim.keymap.set("v", "<S-Home>", "^", { noremap = true })
+vim.keymap.set("v", "<S-End>", "$", { noremap = true })
+
+-- From normal mode
+vim.keymap.set("n", "<S-Home>", "v^", { noremap = true })
+vim.keymap.set("n", "<S-End>", "v$", { noremap = true })
+
+-- From insert mode
+vim.keymap.set("i", "<S-Home>", "<Esc>v^", { noremap = true })
+vim.keymap.set("i", "<S-End>", "<Esc>v$", { noremap = true })
 
 -- vim.keymap.set("x", "<C-F2>", "<Plug>(VM-Visual-All)", {
 --   desc = "Select all occurrences of selection",
