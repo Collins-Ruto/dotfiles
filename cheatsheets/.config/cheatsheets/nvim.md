@@ -53,6 +53,8 @@
 
 ## 🚀 file wide navigation
 
+| Keybinding | Action | Description |
+|------------|--------|-------------|
 | `End` | Line End | Move to end of line |
 | `gg` | File Start | Move to beginning of file |
 | `G` | File End | Move to end of file |
@@ -133,6 +135,10 @@
 | `<C-N>` | Toggle Tree | Toggle NvimTree file explorer |
 | `<C-S>` | Save File | Save current file |
 | `<C-C>` | Copy File | Copy entire file content |
+| `<Space>cp` | Copy Path | Copy full file path to clipboard |
+| `<Space>cf` | Copy Name | Copy filename to clipboard |
+| `<Space>x` | Make Executable | Make current file executable |
+| `-` | Oil Floating | Open Oil file explorer in floating window |
 
 ---
 
@@ -153,6 +159,8 @@
 | `N` | Previous Match | Go to previous search result |
 | `*` | Search Word Forward | Search word under cursor forward |
 | `#` | Search Word Backward | Search word under cursor backward |
+| `[[` | Previous Section | Jump to previous section (markdown) |
+| `]]` | Next Section | Jump to next section (markdown) |
 
 ---
 
@@ -181,6 +189,7 @@
 | `<M-v>` | Toggle V-Term | Toggle vertical terminal |
 | `<M-i>` | Floating Term | Toggle floating terminal |
 | `<Space>pt` | Pick Terminal | Select from hidden terminals |
+| `<Space>z` | Zoxide Jump | Jump to directory using Zoxide |
 
 ---
 
@@ -193,6 +202,7 @@
 | `<Space>n` | Toggle Numbers | Show/hide line numbers |
 | `<Space>rn` | Relative Numbers | Toggle relative line numbers |
 | `<Esc>` | Clear Highlights | Remove search highlights |
+| `<Space>nd` | Dismiss Noice | Dismiss Noice message |
 
 ---
 
@@ -200,10 +210,10 @@
 
 | Keybinding | Action | Description |
 |------------|--------|-------------|
-| `<Space>/` | Toggle Comment | Comment/uncomment line |
+| `<Space>/` | Toggle Comment | Comment/uncomment line (normal/visual) |
 | `gc` | Toggle Comment | Comment operator |
 | `gcc` | Comment Line | Toggle comment on current line |
-| `<C-/>` | Comment Line | Alternative comment toggle |
+| `<C-/>` | Comment Line | Alternative comment toggle (normal/visual) |
 | `<Space>fm` | Format File | Format current file |
 
 ---
@@ -235,10 +245,10 @@
 | Keybinding | Action | Description |
 |------------|--------|-------------|
 | `gra` | Code Action | Show available code actions |
-| `grn` | Rename | Rename symbol under cursor |
-| `grr` | References | Find all references |
-| `gri` | Implementation | Go to implementation |
-| `gO` | Document Symbols | Show document outline |
+| `grn` | Rename | Rename symbol under cursor (LSP) |
+| `grr` | References | Find all references (LSP) |
+| `gri` | Implementation | Go to implementation (LSP) |
+| `gO` | Document Symbols | Show document outline (LSP) |
 | `<Space>ds` | Diagnostic List | Open diagnostic location list |
 | `[d` | Previous Diagnostic | Jump to previous diagnostic |
 | `]d` | Next Diagnostic | Jump to next diagnostic |
@@ -251,8 +261,8 @@
 
 | Keybinding | Action | Description |
 |------------|--------|-------------|
-| `<M-j>` | Move Line Down | Move current line down |
-| `<M-k>` | Move Line Up | Move current line up |
+| `<M-j>` | Move Line Down | Move current line down (supports count) |
+| `<M-k>` | Move Line Up | Move current line up (supports count) |
 | `<C-A>` | Select All | Select entire buffer |
 | `Y` | Yank to End | Copy from cursor to end of line |
 | `[<Space>` | Add Line Above | Insert empty line above |
@@ -325,8 +335,8 @@
 
 | Keybinding | Action | Description |
 |------------|--------|-------------|
-| `<M-j>` | Move Selection Down | Move selected text down |
-| `<M-k>` | Move Selection Up | Move selected text up |
+| `<M-j>` | Move Selection Down | Move selected text down (supports count) |
+| `<M-k>` | Move Selection Up | Move selected text up (supports count) |
 | `<Space>/` | Comment Selection | Comment selected lines |
 
 ### Insert/Select Mode
@@ -345,10 +355,28 @@
 
 | Key | Action |
 |-----|--------|
+| `<Space>mv` | Start Visual Multi | Enter Visual Multi mode |
 | `Ctrl+n` | Select word under cursor (normal mode) or selection (visual mode) |
 | `Ctrl+Down` | Add cursor vertically down |
 | `Ctrl+Up` | Add cursor vertically up |
 | `Shift+Arrows` | Start selecting characters |
+| `Ctrl+LeftClick` | Toggle VM cursor at mouse position |
+| `Ctrl+RightClick`| Select word under mouse |
+| `Alt+Ctrl+RightClick` | Start column selection from mouse position |
+
+---
+
+## Visual Multi Extended Operations
+
+| Key | Action |
+|-----|--------|
+| `\\c` | Visual Cursors | Create visual cursors |
+| `\\gS` | Reselect Last | Reselect last Visual Multi selection |
+| `\\/` | Regex Search | Start regex search in Visual Multi |
+| `\\\` | Add Cursor | Add cursor at current position |
+| `\\a` | Visual Add | Add visual selection |
+| `\\f` | Visual Find | Find visual selection |
+| `\\A` | Select All | Select all occurrences |
 
 ---
 
@@ -403,6 +431,16 @@
 | `Ctrl+LeftMouse` | Create cursor at clicked position |
 | `Ctrl+RightMouse` | Select clicked word |
 | `Meta+Ctrl+RightMouse` | Create column of cursors to clicked line |
+
+---
+
+## Mouse Support (if enabled)
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+LeftMouse` | Create cursor at clicked position |
+| `Ctrl+RightMouse` | Select clicked word |
+| `
 
 ---
 
