@@ -62,9 +62,38 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 vim.keymap.set("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Zoxide jump (Oil)" })
+vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
+
+vim.keymap.set("n", "-", function()
+  require("oil").open_float()
+end, { desc = "[O]il [F]loating window" })
+
+-- Highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank { timeout = 200 }
+  end,
+})
+
+-- Make current file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {
+  silent = true,
+  desc = "Make current file executable",
+})
+
+-- Copy file name or path
+vim.keymap.set("n", "<leader>cf", "<cmd>let @+ = expand('%')<CR>", { desc = "Copy File Name" })
+vim.keymap.set("n", "<leader>cp", "<cmd>let @+ = expand('%:p')<CR>", { desc = "Copy File Path" })
+
+-- Visual mode indent and keep selection
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+
+vim.keymap.set("v", "/", 'y/\\c<C-R>"', { desc = "Search selected text (ignore case)" })
+
 -- vim.keymap.set("x", "<C-F2>", "<Plug>(VM-Visual-All)", {
 --   desc = "Select all occurrences of selection",
 --   remap = true,

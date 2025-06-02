@@ -220,12 +220,20 @@ return {
 
       -- Optional keymap
       -- vim.keymap.set("n", "<leader>fo", "<cmd>Telescope oil<cr>", { desc = "[F]ind [O]il" })
-      vim.keymap.set("n", "<leader>of", function()
-        require("oil").open_float()
-      end, { desc = "[O]il [F]loating window" })
     end,
   },
 
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "andrew-george/telescope-themes",
+    },
+    config = function()
+      require "configs.telescope" -- ⬅️ move config logic here
+    end,
+  },
   {
     "jvgrootveld/telescope-zoxide",
     dependencies = {
@@ -329,7 +337,7 @@ return {
       "hrsh7th/cmp-cmdline",
     },
     config = function()
-      require "custom.configs.cmp"() -- add cmdline setup
+      require "configs.cmp"() -- add cmdline setup
     end,
   },
 

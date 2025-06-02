@@ -14,7 +14,7 @@ local options = {
     json = { { "prettierd", "prettier", stop_after_first = true } },
     graphql = { { "prettierd", "prettier", stop_after_first = true } },
     markdown = { { "prettierd", "prettier", stop_after_first = true } },
-    html = { "htmlbeautifier" },
+    html = { "htmlbeautifier", "prettier" },
     bash = { "beautysh" },
     rust = { "rustfmt" },
     css = { { "prettierd", "prettier", stop_after_first = true } },
