@@ -143,6 +143,39 @@ vim.keymap.set("n", "<S-End>", "v$", { noremap = true })
 vim.keymap.set("i", "<S-Home>", "<Esc>v^", { noremap = true })
 vim.keymap.set("i", "<S-End>", "<Esc>v$", { noremap = true })
 
+local dap = require "dap"
+
+vim.keymap.set("n", "<F5>", dap.continue, { desc = "Start/continue debugging" })
+vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debugger step over" })
+vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debugger step into" })
+vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debugger step out" })
+
+vim.keymap.set("n", "<Leader>b", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<Leader>B", function()
+  dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
+end, { desc = "Set conditional breakpoint" })
+
+vim.keymap.set("n", "<Leader>dr", dap.repl.open, { desc = "Open debugger REPL" })
+vim.keymap.set("n", "<Leader>dl", dap.run_last, { desc = "Rerun last debug session" })
+vim.keymap.set("n", "<leader>de", function()
+  require("dap").terminate()
+  require("dapui").close()
+end, { desc = "Exit DAP and close UI" })
+
+vim.keymap.set("n", "<Leader>dd", function()
+  dap.run {
+    type = "codelldb",
+    request = "launch",
+    name = "Launch file",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = true,
+    args = {},
+  }
+end, { desc = "Launch new debug session" })
+
 -- vim.keymap.set("x", "<C-F2>", "<Plug>(VM-Visual-All)", {
 --   desc = "Select all occurrences of selection",
 --   remap = true,

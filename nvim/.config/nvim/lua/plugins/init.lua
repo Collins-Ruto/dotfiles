@@ -23,6 +23,8 @@ return {
     opts = {
       ensure_installed = {
         "biome",
+        "clangd",
+        "codelldb",
         "typescript-language-server",
         "lua-language-server",
         "tailwindcss-language-server",
@@ -33,6 +35,10 @@ return {
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
+    },
     config = function()
       require "configs.lspconfig"
     end,
@@ -56,21 +62,41 @@ return {
   {
     "pocco81/auto-save.nvim",
     event = { "InsertLeave", "TextChanged" },
-    opts = {
-      enabled = true,
-      execution_message = {
-        message = function()
-          return "AutoSave: saved at " .. vim.fn.strftime "%H:%M:%S"
+    opts = function()
+      local enabled = true
+
+      -- Store state in a Lua variable (global for simplicity)
+      if vim.g.auto_save_enabled == nil then
+        vim.g.auto_save_enabled = true
+      end
+
+      return {
+        enabled = vim.g.auto_save_enabled,
+        execution_message = {
+          message = function()
+            return "AutoSave: saved at " .. vim.fn.strftime "%H:%M:%S"
+          end,
+          dim = 0.18,
+          cleaning_interval = 1250,
+        },
+        trigger_events = { "InsertLeave", "TextChanged" },
+        condition = function(buf)
+          local fn = vim.fn
+          local utils = require "auto-save.utils.data"
+          return fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {})
         end,
-        dim = 0.18,
-        cleaning_interval = 1250,
+      }
+    end,
+    keys = {
+      {
+        "<leader>ua",
+        function()
+          vim.g.auto_save_enabled = not vim.g.auto_save_enabled
+          require("auto-save").setup { enabled = vim.g.auto_save_enabled }
+          vim.notify("AutoSave " .. (vim.g.auto_save_enabled and "enabled" or "disabled"))
+        end,
+        desc = "Toggle AutoSave",
       },
-      trigger_events = { "InsertLeave", "TextChanged" },
-      condition = function(buf)
-        local fn = vim.fn
-        local utils = require "auto-save.utils.data"
-        return fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {})
-      end,
     },
   },
 
@@ -243,66 +269,6 @@ return {
     end,
   },
 
-  -- Required dependencies
-  { "MunifTanjim/nui.nvim" },
-  { "rcarriga/nvim-notify" },
-
-  -- Main plugin
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lualine/lualine.nvim", -- optional, for statusline integration
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require("noice").setup {
-        lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-          },
-          progress = { enabled = true },
-          hover = { enabled = true },
-          signature = { enabled = true },
-        },
-        presets = {
-          bottom_search = false,
-          command_palette = true, -- 👈 makes command window centered!
-          long_message_to_split = true,
-          lsp_doc_border = true,
-        },
-        views = {
-          cmdline_popup = {
-            position = {
-              row = "80%",
-              col = "50%",
-            },
-            size = {
-              width = 60,
-              height = "auto",
-            },
-          },
-          cmdline_popupmenu = {
-            relative = "editor",
-            position = {
-              row = "70%", -- slightly below cmdline
-              col = "50%",
-            },
-            size = {
-              width = 60,
-              height = 10,
-            },
-            border = {
-              style = "rounded",
-            },
-          },
-        },
-      }
-    end,
-  },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -335,6 +301,35 @@ return {
     end,
   },
 
+  -- DAP Core
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "configs.dap"()
+    end,
+  },
+
+  -- DAP UI
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio", -- 👈 Required!
+    },
+    config = function()
+      require("dapui").setup()
+    end,
+  },
+
+  -- Inline virtual text for DAP
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-dap-virtual-text").setup()
+    end,
+  },
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {
