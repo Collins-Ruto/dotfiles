@@ -53,7 +53,7 @@ bind \cf '_fzf_cd_preview'
 
 # Alt+. and Alt+Right: insert last argument
 bind \e. history-token-search-backward
-bind \e\[C history-token-search-backward
+# bind \e\[C history-token-search-backward
 #
 # # === [fzf.fish options (customize as needed)] ===
 #
