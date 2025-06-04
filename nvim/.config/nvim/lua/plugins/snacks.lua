@@ -179,7 +179,7 @@ return {
         desc = "Git Branches",
       },
       {
-        "<M-k>",
+        "<C-k>",
         function()
           require("snacks").picker.keymaps { layout = "vertical" }
         end,

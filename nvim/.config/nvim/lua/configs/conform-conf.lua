@@ -1,28 +1,30 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-
-    -- Use Biome for JS/TS
+    bash = { "beautysh" },
+    sh = { "shellcheck" },
+    rust = { "rustfmt" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
+    json = { "prettierd", "prettier" },
+    css = { "prettierd", "prettier" },
+    scss = { "prettierd", "prettier" },
+    graphql = { "prettierd", "prettier" },
+    markdown = { "prettierd", "prettier" },
+    html = { "htmlbeautifier", "prettier" },
     javascript = { "biome", "biome-organize-imports" },
     typescript = { "biome", "biome-organize-imports" },
     javascriptreact = { "biome", "biome-organize-imports" },
     typescriptreact = { "biome", "biome-organize-imports" },
-
-    -- Optional: keep Prettier fallback
     -- javascript = { "biome", { "prettierd", "prettier", stop_after_first = true } },
-
-    json = { { "prettierd", "prettier", stop_after_first = true } },
-    graphql = { { "prettierd", "prettier", stop_after_first = true } },
-    markdown = { { "prettierd", "prettier", stop_after_first = true } },
-    html = { "htmlbeautifier", "prettier" },
-    bash = { "beautysh" },
-    rust = { "rustfmt" },
-    css = { { "prettierd", "prettier", stop_after_first = true } },
-    scss = { { "prettierd", "prettier", stop_after_first = true } },
-    sh = { "shellcheck" },
   },
 
   formatters = {
+    json = { stop_after_first = true },
+    graphql = { stop_after_first = true },
+    markdown = { stop_after_first = true },
+    css = { stop_after_first = true },
+    scss = { stop_after_first = true },
     stylua = {
       command = "stylua",
       args = {
@@ -31,6 +33,17 @@ local options = {
         "$FILENAME",
         "--",
         "-",
+      },
+    },
+    ["clang-format"] = {
+      prepend_args = {
+        "-style={ \
+                IndentWidth: 4, \
+                TabWidth: 4, \
+                UseTab: Never, \
+                AccessModifierOffset: 0, \
+                IndentAccessModifiers: true, \
+                PackConstructorInitializers: Never}",
       },
     },
   },
