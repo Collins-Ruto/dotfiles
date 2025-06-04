@@ -94,14 +94,20 @@ return {
     opts = function(_, opts)
       -- Extend or override opts
       opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
-        "javascript",
-        "typescript",
-        "tsx",
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
+        "c",
+        "cmake",
+        "cpp",
         "css",
+        "html",
+        "javascript",
+        "lua",
+        "luadoc",
+        "make",
+        "markdown",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
       })
 
       opts.highlight = opts.highlight or {}

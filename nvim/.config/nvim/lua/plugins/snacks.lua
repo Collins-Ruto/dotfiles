@@ -45,6 +45,34 @@ return {
               { win = "preview", title = "{preview}", height = 0.4, border = "top" },
             },
           },
+          telescope = {
+            reverse = true,
+            layout = {
+              box = "horizontal",
+              backdrop = false,
+              width = 0.8,
+              height = 0.9,
+              border = "none",
+              {
+                box = "vertical",
+                { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+                {
+                  win = "input",
+                  height = 1,
+                  border = "rounded",
+                  title = "{title} {live} {flags}",
+                  title_pos = "center",
+                },
+              },
+              {
+                win = "preview",
+                title = "{preview:Preview}",
+                width = 0.55,
+                border = "rounded",
+                title_pos = "center",
+              },
+            },
+          },
         },
         transform = function(item)
           if item.file and item.file:match "lazyvim/lua/config/keymaps%.lua" then
@@ -172,7 +200,7 @@ return {
             end,
             finder = "grep",
             format = "file",
-            layout = "ivy",
+            layout = "telescope",
           }
         end,
         desc = "TODO Tasks (unchecked)",
@@ -207,14 +235,18 @@ return {
       {
         "<leader>fg",
         function()
-          require("snacks").picker.grep()
+          require("snacks").picker.grep {
+            layout = "telescope",
+          }
         end,
         desc = "Grep (Snacks)",
       },
       {
         "<leader>fr",
         function()
-          require("snacks").picker.recent()
+          require("snacks").picker.recent {
+            layout = "telescope",
+          }
         end,
         desc = "Recent files (Snacks)",
       },
