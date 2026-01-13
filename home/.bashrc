@@ -25,3 +25,9 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p --pager=\"less -RF\"'"
 source /usr/share/nvm/init-nvm.sh
 . "$HOME/.cargo/env"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
+export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
