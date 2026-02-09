@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+ cd ~/.winboat && docker compose up -d
+
+  WINBOAT_PORT=$(docker ps --filter name=WinBoat --format '{{.Ports}}' \
+    | sed -n 's/.*127.0.0.1:\([0-9]*\)->3389.*/\1/p')
+
+  setsid xfreerdp3 /v:127.0.0.1:$WINBOAT_PORT \
+    /u:collyArch \
+    /p:linuxx \
+    /f \
+    /dynamic-resolution \
+    +clipboard \
+    /cert:ignore \
+    /drive:shared,/home/collyArch/win_share \
+    >/dev/null 2>&1 &
+

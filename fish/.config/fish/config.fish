@@ -11,6 +11,8 @@ end
 
 starship init fish | source
 
+zoxide init fish | source
+
 # source ~/.local/share/icons-in-terminal/icons.fish
 
 set -gx STARSHIP_CONFIG ~/.config/starship/catpuccin.toml 
@@ -36,7 +38,7 @@ set -gx NVM_DIR "$HOME/.nvm"
 
 # Load nvm from bash into fish with error handling
 if test -f "$NVM_DIR/nvm.sh"
-    if type -q bass
+    if functions -q bass
         bass source $NVM_DIR/nvm.sh --no-use 2>/dev/null
         if test -f "$NVM_DIR/bash_completion"
             bass source $NVM_DIR/bash_completion 2>/dev/null
@@ -104,6 +106,7 @@ alias firstdeploy201="bash deploy-local-ledger.sh && dfx deploy internet_identit
 alias pamcan=pacman
 alias v=nvim
 alias cd=z
+alias c=clear
 
 # === UNCOMMENTED BINDINGS ===
 # bind \cr replay_history
