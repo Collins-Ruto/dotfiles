@@ -80,10 +80,16 @@ return {
           cleaning_interval = 1250,
         },
         trigger_events = { "InsertLeave", "TextChanged" },
+
         condition = function(buf)
           local fn = vim.fn
           local utils = require "auto-save.utils.data"
-          return fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {})
+
+          -- Only save modifiable buffers AND skip certain filetypes
+          local ft = fn.getbufvar(buf, "&filetype")
+          local excluded = { "oil", "TelescopePrompt", "help", "packer" }
+
+          return fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(ft, excluded)
         end,
       }
     end,
