@@ -9,6 +9,6 @@ SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR fish_user_paths:/home/collyArch/Library/Android/sdk/emulator\x1e/home/collyArch/Library/Android/sdk/platform\x2dtools\x1e/home/collyArch/Library/Android/sdk/cmdline\x2dtools/latest/bin\x1e/usr/lib/jvm/java\x2d17\x2dopenjdk/bin\x1e/home/collyArch/bin\x1e/home/collyArch/\x2elocal/bin
+SETUVAR fish_user_paths:/home/collyArch/\x2econfig/rofi/scripts\x1e/home/collyArch/Library/Android/sdk/emulator\x1e/home/collyArch/Library/Android/sdk/platform\x2dtools\x1e/home/collyArch/Library/Android/sdk/cmdline\x2dtools/latest/bin\x1e/usr/lib/jvm/java\x2d17\x2dopenjdk/bin\x1e/home/collyArch/bin\x1e/home/collyArch/\x2elocal/bin
 SETUVAR fzf_preview_dir_cmd:exa\x20\x2d\x2dall\x20\x2d\x2dcolor\x3dalways\x20\x2d\x2dtree\x20\x2d\x2dlevel\x3d2
 SETUVAR fzf_preview_file_cmd:bat\x20\x2d\x2dstyle\x3dnumbers\x2cchanges\x20\x2d\x2dcolor\x3dalways

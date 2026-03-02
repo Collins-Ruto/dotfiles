@@ -108,5 +108,10 @@ alias v=nvim
 alias cd=z
 alias c=clear
 
+alias tn="tmux new-session -s"
+alias tl="tmux ls"
+alias ta="tmux attach-session -t"
+alias t="tmux new-session -A -s main"
+
 # === UNCOMMENTED BINDINGS ===
 # bind \cr replay_history
