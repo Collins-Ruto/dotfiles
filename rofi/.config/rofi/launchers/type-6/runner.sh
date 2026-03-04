@@ -15,5 +15,8 @@ theme='style-4'
 
 ## Run
 pkill rofi || rofi \
-    -show drun \
-    -theme "${dir}"/${theme}.rasi
+    -show run \
+    -theme "${dir}"/${theme}.rasi \
+    -theme-str 'configuration { show-icons: false; }' \
+    -theme-str 'element-icon { enabled: false; }'
+
