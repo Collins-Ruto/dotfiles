@@ -20,6 +20,7 @@
         vertical_align: Center,
         horizontal_align: Center,
     ),
+    lyrics_dir: Some("/home/collyArch/Music"), 
     keybinds: (
         global: {
             "u":       Update, // update music database
@@ -193,4 +194,18 @@
                 ])
         ),
     ],
+    cava: (
+        framerate: 60,
+        autosens: true,
+        sensitivity: 100,
+        input: (
+            method: Pipewire, // Change to PulseAudio if not using PipeWire
+            source: "auto",
+        ),
+        smoothing: (
+            noise_reduction: 25,
+            monstercat: false,
+            waves: false,
+        ),
+    ),
 )

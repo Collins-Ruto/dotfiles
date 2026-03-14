@@ -7,11 +7,13 @@
     show_song_table_header: false,
     draw_borders: false,
     browser_column_widths: [20, 38, 42],
-    background_color: "#2e3440",
+
+    background_color: None,
+    header_background_color: None,
+    modal_background_color: None,
     modal_backdrop: true,
+
     text_color: "#d8dee9",
-    header_background_color: "#2e3440",
-    modal_background_color: "#2e3440",
     preview_label_style: (fg: "#b48ead"),
     preview_metadata_group_style: (fg: "#81a1c1"),
     song_table_album_separator: None,
@@ -326,15 +328,18 @@
     },
     cava: (
         bar_symbols: ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'],
-        bar_width: 1, bar_spacing: 1,
+        bar_width: 2, bar_spacing: 1,
         bg_color: "#2e3440",
         bar_color: Gradient({
-                0:   "#5e81ac",
-                33:  "#81a1c1",
-                67:  "#88c0d0",
-                100: "#8fbcbb",
-            })
-    ),
+              0: "#FF2D7D",
+             14: "#FF4FA3",
+             28: "#FF6EC7",
+             42: "#D67EFF",
+             56: "#9D8AFF",
+             70: "#6A9AFF",
+             84: "#38B6FF",
+            100: "#00D0E0",
+        }),    ),
     lyrics:(timestamp: false),
     border_symbol_sets: {
     "rounded_collapsed_top": (
