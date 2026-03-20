@@ -1,0 +1,76 @@
+@import "~/.config/rofi/theme"
+
+* {
+    background:       @bg0;
+    background-alt:   @dark;
+    foreground:       @fg;
+    background-color: transparent;
+    text-color:       @fg;
+    border-color:     @accent;
+}
+
+configuration {
+    font: "Noto Sans 20";
+    show-icons: true;
+    location: 6;
+    sidebar-mode: false;
+    prompt: "search: ";
+    alternate-row-color: false;
+    fixed-height: false;
+}
+
+listview {
+    spacing: 0px;
+    scrollbar: true;
+    layout: horizontal;
+    background-color: transparent;
+}
+
+element-icon {
+    vertical-align: 0.0;
+    size: 300px;
+    padding: 0px;
+    margin: 0px;
+    spacing: 0px;
+}
+
+element-text {
+    enabled: true;
+    font: "Noto Sans 10";
+    horizontal-align: 0.5;
+    text-color: @fg;
+    padding: 2px 0px;
+}
+
+element-text selected {
+    enabled: false;
+    background-color: @accent;
+    text-color: @bg0;
+}
+
+element.alternate.normal {
+    background-color: transparent;
+}
+
+element {
+    orientation: vertical;
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+    spacing: 0px;
+}
+
+element selected.normal {
+    border: 2px;
+    border-color: @accent;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+window {
+    width: 1820px;
+    height: 38%;
+    background-color: @background;
+    y-offset: 60px;
+    border: 0px;
+}

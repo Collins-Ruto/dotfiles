@@ -1,0 +1,240 @@
+@import "theme"
+
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun,filebrowser,calc";
+    show-icons:                 true;
+    display-drun:               "APPS";
+    display-filebrowser:        "ARCHIVOS";
+    display-calc:               "CALCULADORA";
+	drun-display-format:        "{name}";
+    calc {
+        hint-result: "Resultado: ";
+        hint-welcome: "Calculadora";
+    }
+}
+
+/*****----- Global Properties -----*****/
+* {
+    background:                  @bg0;
+    background-alt:              @dark;
+    foreground:                  @fg;
+    selected-active-background:  @accent;
+    selected-active-foreground:  @background;
+    selected-urgent-background:  @red;
+    selected-urgent-foreground:  @background;
+    alternate-urgent-background: @foreground;
+    urgent-foreground:           @red;
+    selected-normal-background:  @accent;
+    selected-normal-foreground:  @background-alt;
+    active-background:           @background;
+    active-foreground:           @accent;
+    background-color:            transparent;
+    border-color:                @accent;
+    alternate-active-foreground: @accent;
+    separatorcolor:              @foreground;
+}
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       650px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    border-radius:               15px;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "listbox" ];
+}
+
+listbox {
+    spacing:                     20px;
+    padding:                     20px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "mode-switcher", "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    children:                    [ "textbox-prompt-colon", "prompt", "entry" ];
+}
+prompt {
+    enabled:                     true;
+    spacing:                     10px;
+    border-radius:               10px;
+    background-color:            inherit;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Buscar";
+    placeholder-color:           @bg4;
+}
+
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     true;
+    spacing:                     5px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+button {
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  inherit;
+    cursor:                      pointer;
+}
+button selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    lines:                       7;
+    columns:                     1;
+    cycle:                       false;
+    dynamic:                     true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-columns:               true;
+    fixed-height:                true;
+    border:                      0px;
+    
+    spacing:                     5px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+
+scrollbar {
+    width:        4px ;
+    padding:      0;
+    handle-width: 4px ;
+    border:       0;
+    handle-color: @foreground;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     8px;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+    border:                      0px;
+}
+element normal.normal {
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+element normal.urgent {
+    background-color:            @background;
+    text-color:                  @urgent-foreground;
+}
+element normal.active {
+    background-color:            @active-background;
+    text-color:                  @active-foreground;
+}
+element selected.normal {
+    background-color:            @selected-normal-background;
+    text-color:                  @selected-normal-foreground;
+}
+element selected.urgent {
+    background-color:            @selected-urgent-background;
+    text-color:                  @selected-urgent-foreground;
+}
+element selected.active {
+    background-color:            @selected-active-background;
+    text-color:                  @selected-active-foreground;
+}
+element alternate.normal {
+    background-color: @background-alt;
+    text-color:       @foreground;
+}
+element alternate.active {
+    background-color: @background-alt;
+    text-color:       @alternate-active-foreground;
+}
+element alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @urgent-foreground;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Message -----*****/
+message {
+    background-color:            transparent;
+    border:                      0px;
+}
+textbox {
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+error-message {
+    padding:                     15px;
+    border-radius:               20px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
