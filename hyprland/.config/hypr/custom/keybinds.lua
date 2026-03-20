@@ -1,9 +1,14 @@
 -- Keybinds Configuration
 -- Official Wiki Specification: https://wiki.hypr.land/Configuring/Basics/Binds/
+--! ##! Shell Mappings
+hl.unbind("SUPER + Slash")
+hl.bind("SUPER + Slash", hl.dsp.global("quickshell:cheatsheetToggle"), { description = "Toggle cheatsheet" })
+
 local runner = "~/.config/rofi/launchers/type-6/runner.sh"
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local secondMod = "SUPER + SHIFT" -- Sets "Windows" + "SHIFT" key as second modifier
+local qsScripts = "$HOME/.config/quickshell/$qsConfig/scripts"
 
 -- Unbinds
 hl.unbind("SUPER + O")
@@ -16,6 +21,15 @@ hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("~/.config/rofi/launchers/type-6/laun
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(runner))
 -- Toggle window maximization
 hl.bind(secondMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+-- Force nsxiv to open your wallpapers folder and pipe the selection into end-4's switchwall script
+
+hl.bind(
+	secondMod .. " + T",
+	hl.dsp.exec_cmd("~/.config/hypr/custom/scripts/wallpaper-picker.sh"),
+	{ description = "Wallpaper: Pick with rofi" }
+)
+
+hl.bind(secondMod .. " + W", hl.dsp.exec_cmd("quickshell -c hyprquickpaper"), { description = "Wallpaper Picker" })
 
 -- ── Terminal ──────────────────────────────────────────────────────────────────
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("foot")) -- [hidden]
@@ -58,7 +72,8 @@ end
 
 -- Tab & Grave Cycle Mechanics (Corrected String to Table format)
 hl.bind("SUPER + Tab", hl.dsp.focus({ workspace = "previous" })) -- [hidden]
-hl.bind("SUPER + GRAVE", hl.dsp.focus({ workspace = "m+2" })) -- [hidden]
+hl.bind("SUPER + GRAVE", hl.dsp.focus({ workspace = "m+1" })) -- [hidden]
+hl.bind(secondMod .. " + GRAVE", hl.dsp.focus({ workspace = "m-1" })) -- [hidden]
 hl.bind("SUPER + SHIFT + Tab", hl.dsp.focus({ workspace = "m0" })) -- [hidden]
 
 -- ── Window Cycling (Chained Actions via Anonymous Function) ───────────────────
