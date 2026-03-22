@@ -1,0 +1,13 @@
+
+# Example yazi.toml snippet
+[mgr]
+ratio          = [1, 4, 4] # Parent, current directory, and preview column sizes
+sort_by        = "natural" # Sort files naturally (1.md < 2.md < 10.md)
+sort_sensitive = false     # Case-insensitive sorting
+sort_dir_first = true      # Keep folders on top
+show_hidden    = false     # Toggle hidden files
+
+[preview]
+max_width  = 4000  # Default is often too small for large/high-res displays
+max_height = 4000  # Keeps aspect ratio scaling proportional
+

@@ -1,0 +1,137 @@
+# Place this in your ~/.config/yazi/theme.toml or %AppData%\yazi\theme.toml
+
+[app]
+# Leave bg empty to completely inherit your terminal's background/transparency
+overall = { fg = "#ffffff" } 
+
+[mgr]
+# Inherit terminal background for the 3 columns (Parent, Current, Preview)
+parent  = { fg = "#888888" }
+current = { fg = "#ffffff" }
+preview = { fg = "#ffffff" }
+
+# : Tabs {{{
+
+[tabs]
+active   = { fg = "#1e1e2e", bg = "#89b4fa", bold = true }
+inactive = { fg = "#89b4fa", bg = "#313244" }
+
+# : }}}
+
+
+# : Mode {{{
+
+[mode]
+
+normal_main = { fg = "#1e1e2e", bg = "#89b4fa", bold = true }
+normal_alt  = { fg = "#89b4fa", bg = "#313244" }
+
+# Select mode
+select_main = { fg = "#1e1e2e", bg = "#94e2d5", bold = true }
+select_alt  = { fg = "#94e2d5", bg = "#313244" }
+
+# Unset mode
+unset_main = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
+unset_alt  = { fg = "#f2cdcd", bg = "#313244" }
+
+# : }}}
+
+# : Status bar {{{
+
+[status]
+# Permissions
+perm_sep   = { fg = "#7f849c" }
+perm_type  = { fg = "#89b4fa" }
+perm_read  = { fg = "#f9e2af" }
+perm_write = { fg = "#f38ba8" }
+perm_exec  = { fg = "#a6e3a1" }
+
+# Progress
+progress_label  = { fg = "#ffffff", bold = true }
+progress_normal = { fg = "#a6e3a1", bg = "#45475a" }
+progress_error  = { fg = "#f9e2af", bg = "#f38ba8" }
+
+# : }}}
+
+# : Pick {{{
+
+[pick]
+border   = { fg = "#89b4fa" }
+active   = { fg = "#f5c2e7", bold = true }
+inactive = {}
+
+# : }}}
+
+
+# : Input {{{
+
+[input]
+border   = { fg = "#89b4fa" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# : }}}
+
+
+# : Completion {{{
+
+[cmp]
+border = { fg = "#89b4fa" }
+
+# : }}}
+
+
+# : Tasks {{{
+
+[tasks]
+border  = { fg = "#89b4fa" }
+title   = {}
+hovered = { fg = "#f5c2e7", bold = true }
+
+# : }}}
+
+
+# : Which {{{
+
+[which]
+mask            = { bg = "#313244" }
+cand            = { fg = "#94e2d5" }
+rest            = { fg = "#9399b2" }
+desc            = { fg = "#f5c2e7" }
+separator       = "  "
+separator_style = { fg = "#585b70" }
+
+# : }}}
+
+
+# : Help {{{
+
+[help]
+on      = { fg = "#94e2d5" }
+run     = { fg = "#f5c2e7" }
+hovered = { reversed = true, bold = true }
+footer  = { fg = "#313244", bg = "#cdd6f4" }
+
+# : }}}
+
+
+# : Spotter {{{
+
+[spot]
+border   = { fg = "#89b4fa" }
+title    = { fg = "#89b4fa" }
+tbl_col  = { fg = "#94e2d5" }
+tbl_cell = { fg = "#f5c2e7", bg = "#45475a" }
+
+# : }}}
+
+
+# : Notification {{{
+
+[notify]
+title_info  = { fg = "#a6e3a1" }
+title_warn  = { fg = "#f9e2af" }
+title_error = { fg = "#f38ba8" }
+
+# : }}}
