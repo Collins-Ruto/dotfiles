@@ -110,7 +110,50 @@ stow -nv fish
 
 ---
 
-### ⚠️ **Special Cases & Gotchas**
+### **Wallpaper Switcher**
+
+Original [Docs](https://github.com/iamsurjog/hyprquickpaper/blob/main/README.md)
+Rofi options exist check custom keybinds for "SUPER + SHIFT + T"
+
+![HyprQuickPaper](assets/wallpaper-switcher.png)
+
+### **RMPC**
+
+![rmpc](assets/rmpc.png) ![rmpc show](assets/rmpc2.png)
+
+#### Lyrics Fetching Script
+
+Script location
+Read it, Make it executable and just run it.
+
+```bash
+    ~/dotfiles/rmpc/.config/rmpc/scripts/ffprobe_fetch_lyrics.sh
+
+    # Stop pc from sleep since it will take time for large music library
+    systemd-inhibit --what=sleep --who="main" --why="downloading lyrics" ~/.config/rmpc/scripts/ffprobe_fetch_lyrics.sh 
+
+```
+
+Requirements
+
+```bash
+    # ffprobe package included in ffmpeg
+    sudo pacman -S ffmpeg
+```
+
+---
+
+### Top Bar
+
+Config location
+
+```bash
+.config/quickshell/ii/modules/ii/bar
+```
+
+![bar](assets/bar.png)
+
+### ⚠️ **Special Cases & Gotchas** (deprecated .conf version)
 
 #### 🖥️ Hyprland `hyprlock.conf` Warning for [dots-hyprland](https://github.com/end-4/dots-hyprland) users
 
