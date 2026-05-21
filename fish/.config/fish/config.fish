@@ -64,14 +64,9 @@ set -gx XDG_STATE_HOME "$HOME/.local/state"
 
 # === FZF CONFIGURATION ===
 # Key bindings
-bind \er '_fzf_search_history'        # Alt+R: fuzzy command history
 bind \et '_fzf_open_file'             # Alt+T: fuzzy file search
-bind \ec '_fzf_cd'                    # Alt+C: fuzzy directory jump via zoxide
-bind \ef '_fzf_open_directory'
 bind \eg '_fzf_open_full_search'
 bind \eh '_fzr_all_folder'
-bind \eb '_fzr_folder; commandline -f repaint'  # Alt+Shift+f to launch folder search
-bind \cf '_fzf_cd_preview'
 bind \e. history-token-search-backward # Alt+. and Alt+Right: insert last argument
 
 # FZF options
