@@ -1,4 +1,4 @@
-![image](./cover.jpg)
+![ ](./cover.jpg)
 <div align="center">
 
 *"Simplicity is the ultimate sophistication"* - Leonardo da Vinci
