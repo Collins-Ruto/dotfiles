@@ -30,13 +30,7 @@ function _fzr_all_folder
   end
 
   # Collect all results with a prefix to track origin
-  set -l all_dirs
-  for dir in (eval $cmd1)
-    set all_dirs $all_dirs "HOME:$dir"
-  end
-  for dir in (eval $cmd2)
-    set all_dirs $all_dirs "CONFIG:$dir"
-  end
+
 
   # Start with current directory
   set -l current_dir $PWD
@@ -72,10 +66,15 @@ fi
 # Directory info with icons
 echo -e "\033[1;36m📦 Directory Info:\033[0m"
 echo -e "\033[1;34mPath:\033[0m $dir"
-echo -e "\033[1;34mContents:\033[0m $(fd --max-depth=1 --hidden --no-ignore . "$dir" | wc -l)"
-echo -e "\033[1;34mHidden Items:\033[0m $(fd --max-depth=1 --hidden --type d --type f --glob ".*" . "$dir" | wc -l)"
-echo -e "\033[1;34mSize:\033[0m $(timeout 0.2s du -s --apparent-size -h "$dir" 2>/dev/null | cut -f1 || echo "large dir")"
-# echo -e "\033[1;34mSize:\033[0m $(du -sh "$dir" 2>/dev/null | cut -f1)"
+
+# Single fd pass for both counts
+all_items=$(fd --max-depth=1 --hidden --no-ignore . "$dir")
+total=$(echo "$all_items" | wc -l)
+hidden=$(echo "$all_items" | grep -c '/\.')
+
+echo -e "\033[1;34mContents:\033[0m $total"
+echo -e "\033[1;34mHidden:\033[0m $hidden"
+echo -e "\033[1;34mSize:\033[0m $(timeout 0.1s du -s --apparent-size -h "$dir" 2>/dev/null | cut -f1 || echo "…")"
 
 # Enhanced directory listing
 echo
@@ -98,7 +97,7 @@ $cyan $yellow Enter$normal: Open $yellow Tab$normal: Select & Exit $yellow Alt+B
 $cyan└──────────────────────────────────────────────────────────────┘$normal
 "
 
-    set -l selected (printf "%s\n" $all_dirs | fzf --ansi \
+    set -l selected (begin; eval $cmd1 | sed 's/^/HOME:/'; eval $cmd2 | sed 's/^/CONFIG:/'; end | fzf --ansi \
       --layout=reverse \
       --preview "$preview_script {}" \
       --preview-window "right:65%:wrap" \
@@ -170,10 +169,13 @@ echo
 # Special handling for different file types
 case "$mimetype" in
   image/*)
-    if command -v img2sixel &>/dev/null; then
+    if command -v chafa &>/dev/null; then
+      chafa --format=sixel \
+      --size="${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 6))" \
+      --fit-width \
+      "$file"
+    elif command -v img2sixel &>/dev/null; then
       img2sixel -w 600 "$file" 2>/dev/null
-    elif command -v chafa &>/dev/null; then
-      chafa --size=60 "$file"
     else
       file "$file"
     fi
@@ -192,6 +194,13 @@ case "$mimetype" in
     bat --style=numbers --color=always --line-range :500 "$file" 2>/dev/null || 
     highlight -O ansi --force --line-numbers "$file" 2>/dev/null ||
     cat "$file"
+    ;;
+  audio/*)
+    if command -v exiftool &>/dev/null; then
+      exiftool "$file" 2>/dev/null
+    else
+      file "$file"
+    fi
     ;;
   *)
     file "$file"
@@ -228,6 +237,15 @@ esac' > $file_preview_script
             sxiv -a "$file" &
           else
             xdg-open "$file" &
+          end
+        else if string match -q "audio/*" $mimetype
+          if command -v rmpc &>/dev/null
+            rmpc add "file://$file" >/dev/null 2>&1
+            rmpc play >/dev/null 2>&1
+            rmpc  # opens TUI, blocks until you quit, then returns to explorer
+          else
+            xdg-open "$file" &
+            disown
           end
         else if string match -q "application/pdf" $mimetype
           if command -v zathura &>/dev/null
