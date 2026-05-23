@@ -11,3 +11,5 @@ hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
 -- Java font fixes
 hl.env("_JAVA_OPTIONS", "-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true")
+
+hl.env("GTK_CSD", "0")
