@@ -1,5 +1,9 @@
 -- Global Config: Input, Visuals, and XWayland Compatibility
 hl.config({
+	general = {
+		border_size = 0,
+	},
+
 	input = {
 		-- Sensitivity ranges from -1.0 to 1.0. 0 means no modification.
 		sensitivity = 0.3,
