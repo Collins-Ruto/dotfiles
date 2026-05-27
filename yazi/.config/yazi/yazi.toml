@@ -10,4 +10,62 @@ show_hidden    = false     # Toggle hidden files
 [preview]
 max_width  = 4000  # Default is often too small for large/high-res displays
 max_height = 4000  # Keeps aspect ratio scaling proportional
+image_quality = 75
+horizontal_alignment = "center" # Center images horizontally ("left", "center", "right")
+vertical_alignment = "center" # Center images vertically ("top", "center", "bottom")
 
+[plugin]
+  prepend_preloaders = [
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo" },
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator, Adobe Photoshop is image/adobe.photoshop, already handled above
+    { mime = "application/postscript", run = "mediainfo" },
+  ]
+  prepend_previewers = [
+    # Replace magick, image, video with mediainfo
+    { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+    { mime = "{audio,video,image}/*", run = "mediainfo"},
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator, Adobe Photoshop is image/adobe.photoshop, already handled above
+    { mime = "application/postscript", run = "mediainfo" },
+  ]
+
+[spot]
+# Section header style.
+# Example: Video, Text, Image,... with green color in preview images above
+title = { fg = "green" }
+
+# Value style.
+# Example: `Format: FLAC` with blue color in preview images above
+tbl_col = { fg = "blue" }
+
+# Or, use rules to rewrite the entire default rules:
+[opener]
+edit = [
+  { run = 'nvim "$@"', block = true },
+]
+
+play = [
+  { run = 'mpv "$@"', orphan = true, for = "unix"},
+]
+
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ mime = "video/*", use = "play" },
+
+	# { mime = "application/json", use = "edit" },
+	{ url = "*.json", use = "edit" },
+
+	# Multiple openers for a single rule
+	{ url = "*.html", use = [ "open", "edit" ] },
+]
+
+[[opener.bulk-rename]]
+run   = "code --wait %s"
+block = true
+
+[[open.prepend_rules]]
+url = "bulk-rename.txt"
+use = "bulk-rename"
