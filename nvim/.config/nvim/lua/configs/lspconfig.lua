@@ -1,11 +1,10 @@
-local lspconfig = require "lspconfig"
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
 -- Capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
--- 🌟 Define custom_on_attach first!
+-- Custom on_attach
 local function custom_on_attach(client, bufnr)
   local opts = { buffer = bufnr, silent = true }
 
@@ -15,29 +14,29 @@ local function custom_on_attach(client, bufnr)
   -- Diagnostic float
   vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, opts)
 
-  -- NvChad default behavior
+  -- NvChad defaults
   local default_config = require "nvchad.configs.lspconfig"
   if default_config.on_attach then
     default_config.on_attach(client, bufnr)
   end
 end
 
--- ✅ Assign AFTER it's defined
 local on_attach = custom_on_attach
 
--- LSP Servers
-local servers = { "tsserver", "tailwindcss", "biome" }
+-- TypeScript and Biome
+local servers = { "ts_ls", "biome" }
 
 for _, server_name in ipairs(servers) do
-  server_name = server_name == "tsserver" and "ts_ls" or server_name
-  lspconfig[server_name].setup {
+  vim.lsp.config(server_name, {
     on_attach = on_attach,
     capabilities = capabilities,
-  }
+  })
+
+  vim.lsp.enable(server_name)
 end
 
--- TailwindCSS special case
-lspconfig.tailwindcss.setup {
+-- TailwindCSS
+vim.lsp.config("tailwindcss", {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = {
@@ -50,26 +49,17 @@ lspconfig.tailwindcss.setup {
     "typescriptreact",
     "vue",
   },
-}
+})
 
+vim.lsp.enable "tailwindcss"
 -- Clangd with formatting disabled
-lspconfig.clangd.setup {
+vim.lsp.config("clangd", {
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
-}
+})
 
--- Diagnostics display config
-vim.diagnostic.config {
-  virtual_text = {
-    prefix = "●",
-    spacing = 2,
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-}
+vim.lsp.enable "clangd"

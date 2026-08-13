@@ -1,0 +1,5 @@
+# Ignore everything in the hypr directory except custom
+.config/hypr/hyprlock/
+.config/hypr/hypridle.conf
+.config/hypr/hyprlock.conf
+

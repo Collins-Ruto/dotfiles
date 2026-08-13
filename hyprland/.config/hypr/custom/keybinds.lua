@@ -17,12 +17,13 @@ hl.unbind("SUPER + W")
 -- ── Launcher ─────────────────────────────────────────────────────────────────
 
 -- This natively catches a clean tap/release of the SUPER key instantly
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("~/.config/rofi/launchers/type-6/launcher.sh"))
+hl.bind("SUPER_L", hl.dsp.exec_cmd("~/.config/rofi/launchers/type-6/launcher.sh"), { release = true })
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(runner))
 -- Toggle window maximization
 hl.bind(secondMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+-- Toggle window opacity
+hl.bind(secondMod .. " + O", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
 -- Force nsxiv to open your wallpapers folder and pipe the selection into end-4's switchwall script
-
 hl.bind(
 	secondMod .. " + T",
 	hl.dsp.exec_cmd("~/.config/hypr/custom/scripts/wallpaper-picker.sh"),
@@ -77,7 +78,9 @@ hl.bind(secondMod .. " + GRAVE", hl.dsp.focus({ workspace = "m-1" })) -- [hidden
 hl.bind("SUPER + SHIFT + Tab", hl.dsp.focus({ workspace = "m0" })) -- [hidden]
 
 -- ── Window Cycling (Chained Actions via Anonymous Function) ───────────────────
-hl.bind("ALT + Tab", function()
-	hl.dispatch(hl.dsp.layout("cyclenext")) -- Shifts target pointer context
-	hl.dispatch(hl.dsp.window.alter_zorder({ action = "top" })) -- Forces focused asset window elevation
-end)
+hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { repeating = true, description = "Windows . Next window" }) -- Shifts target pointer context
+hl.bind(
+	"ALT + SHIFT + Tab",
+	hl.dsp.window.cycle_next({ next = false }),
+	{ repeating = true, description = "Windows . Previous window" }
+) -- Forces focused asset window elevation

@@ -49,8 +49,8 @@ if test -f "$NVM_DIR/nvm.sh"
 end
 
 # === OTHER ENVIRONMENT VARIABLES ===
-if test -f ~/.cache/ags/user/generated/terminal/sequences.txt
-    cat ~/.cache/ags/user/generated/terminal/sequences.txt
+if test -f ~/.local/state/caelestia/sequences.txt
+    cat ~/.local/state/caelestia/sequences.txt
 end
 
 set -gx BAT_THEME "base16"
@@ -100,6 +100,7 @@ alias deploy201="dfx deploy dfinity_js_backend && dfx generate dfinity_js_backen
 alias firstdeploy201="bash deploy-local-ledger.sh && dfx deploy internet_identity && dfx deploy dfinity_js_backend && dfx generate dfinity_js_backend && dfx deploy dfinity_js_frontend"
 alias pamcan=pacman
 alias v=nvim
+alias r=rmpc
 alias cd=z
 alias c=clear
 
